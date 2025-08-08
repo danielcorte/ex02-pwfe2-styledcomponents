@@ -1,6 +1,5 @@
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import logo from "../images/favicon.png";
-import img from "../images/imgOquee.png";
 import topico1 from "../images/topico1.png";
 import topico2 from "../images/topico2.png";
 import topico3 from "../images/topico3.png";
@@ -12,6 +11,10 @@ import topico8 from "../images/topico8.png";
 import { FaCode } from "react-icons/fa";
 import { BiLayer } from "react-icons/bi";
 import { MdDesignServices } from "react-icons/md";
+import { WhatIsComponent } from "../components/whatIsComponent";
+import { CardCaracteristicas } from "../components/cardCaracteristicas";
+import { FaCogs, FaPalette, FaLayerGroup } from "react-icons/fa";
+
 
 export default function Home() {
 
@@ -28,7 +31,7 @@ export default function Home() {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: deeppink;
+        background: #ff1493;
         padding: 16px 48px;
         width: 100%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -101,7 +104,7 @@ export default function Home() {
         padding: 20px;
         border-radius: 10px;
         width: 22%;
-        background: deeppink;
+        background: #f869b5;
         transition: all;
         transition-duration: 0.3s;
 
@@ -117,14 +120,14 @@ export default function Home() {
         gap: 5%;
         width: 80%;
         position: absolute;
-        margin-top: 30%;
+        margin-top: 25%;
 `;
 
     const TextWhatIs = styled.p`
-    text-align: justify;
-    color: white;
-    font-weight: lighter;
-    margin-top: 20px;
+        text-align: justify;
+        color: white;
+        font-weight: lighter;
+        margin-top: 20px;
 `;
 
     const TextCarac = styled.p`
@@ -132,7 +135,94 @@ export default function Home() {
         color: deeppink;
         font-weight: bold;
         padding-top: 200px;
+        margin-bottom: 45px;
 `;
+
+    const GridCarac = styled.div`
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr; 
+        justify-items: center; 
+        align-items: center; 
+        gap: 20px; 
+        width: 80%;
+`;
+
+    const TextComand = styled.p`
+        font-size: 40px;
+        color: deeppink;
+        font-weight: bold;
+        margin-top: 100px;
+        margin-bottom: 30px;
+`;
+
+    const Secao = styled.section`
+        padding: 40px;
+        background-color: #fdfdfd;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 2%;
+`;
+
+    const Card = styled.div`
+        background-color: #ff1493;
+        color: white;
+        padding: 20px;
+        width: 40%;
+        height: 280px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+`;
+
+    const CardTitulo = styled.h3`
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+`;
+
+    const CardDescricao = styled.p`
+        margin-bottom: 12px;
+`;
+
+    const Codigo = styled.pre`
+        background-color: #fcaff1;
+        padding: 12px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 14px;
+        margin-bottom: 20px;
+`;
+
+    const Botao = styled.button`
+        background-color: ${(props) => (props.primary ? "#db7093" : "#f4a261")};
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-right: 10px;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+`;
+
+    const Titulo = styled.h2`
+        color: ${(props) => props.temaColor};
+`;
+
+    const theme = {
+        colors: {
+            principal: "#db7093",
+            secundaria: "#f4a261"
+        }
+    };
 
     const cards = [
         {
@@ -155,52 +245,102 @@ export default function Home() {
     const caracteristicas = [
         {
             id: 1,
-            titulo: "CSS-in-JS",
+            titulo: "🧩 CSS-in-JS",
             descricao: "Escreva estilos diretamente dentro do seu código JavaScript/React, eliminando a separação entre lógica e aparência.",
             img: topico1
         },
         {
             id: 2,
-            titulo: "Escopo automático de estilos",
+            titulo: "🧼 Escopo automático de estilos",
             descricao: "Os estilos são aplicados localmente a cada componente, evitando conflitos com outras partes da aplicação.",
             img: topico2
         },
         {
             id: 3,
-            titulo: "Estilização condicional com props",
+            titulo: "🎯 Estilização condicional com props",
             descricao: "Altere dinamicamente os estilos de um componente com base nas props recebidas.",
             img: topico3
         },
         {
             id: 4,
-            titulo: "Suporte a temas com ThemeProvider",
+            titulo: "🎨 Suporte a temas com ThemeProvider",
             descricao: "Use temas globais para aplicar cores, fontes e estilos em toda a aplicação com consistência.",
             img: topico4
         },
         {
             id: 5,
-            titulo: "Componentes reutilizáveis",
+            titulo: "♻️ Componentes reutilizáveis",
             descricao: "Crie componentes de estilo que podem ser reaproveitados várias vezes com consistência visual.",
             img: topico5
         },
         {
             id: 6,
-            titulo: "Composição de estilos",
+            titulo: "🔗 Composição de estilos",
             descricao: "Estenda ou modifique componentes existentes sem duplicar código.",
             img: topico6
         },
         {
             id: 7,
-            titulo: "Integração com TypeScript",
+            titulo: "⚙️ Integração com TypeScript",
             descricao: "Styled Components oferece tipagem para props e temas, tornando o desenvolvimento mais seguro e produtivo.",
             img: topico7
         },
         {
             id: 8,
-            titulo: "Organização do código",
+            titulo: "🛠️ Organização do código",
             descricao: "Estilizar junto com o componente melhora a leitura e manutenibilidade da aplicação.",
             img: topico8
         },
+    ];
+
+    const comandosStyled = [
+        {
+            titulo: "styled.element",
+            descricao: "Permite criar componentes estilizados diretamente de elementos HTML.",
+            codigo: `const Botao = styled.button\`
+  background-color: #db7093;
+  color: white;
+  padding: 10px;
+\`;`,
+            icone: <FaCode size={20} />,
+            exemplo: <Botao>Normal</Botao>
+        },
+        {
+            titulo: "Props",
+            descricao: "Use props para alterar estilos dinamicamente.",
+            codigo: `const Botao = styled.button\`
+  background-color: \${props => props.primary ? "#db7093" : "#f4a261"};
+\`;`,
+            icone: <FaCogs size={20} />,
+            exemplo: (
+                <>
+                    <Botao>Normal</Botao>
+                    <Botao primary>Primário</Botao>
+                </>
+            )
+        },
+        {
+            titulo: "ThemeProvider",
+            descricao: "Permite definir temas globais reutilizáveis em todo o projeto.",
+            codigo: `const theme = {
+  colors: {
+    principal: "#db7093"
+  }
+};
+
+<ThemeProvider theme={theme}>...</ThemeProvider>`,
+            icone: <FaPalette size={20} />,
+            exemplo: <Titulo temaColor={theme.colors.principal}>Texto com tema</Titulo>
+        },
+        {
+            titulo: "Estender estilos",
+            descricao: "Crie novos componentes reaproveitando estilos existentes.",
+            codigo: `const BotaoPrimario = styled(Botao)\`
+  font-weight: bold;
+\`;`,
+            icone: <FaLayerGroup size={20} />,
+            exemplo: <Botao primary>Original</Botao>
+        }
     ];
 
 
@@ -219,7 +359,7 @@ export default function Home() {
             </Header>
 
             <WhatIs id="oque">
-                <ImageWhatIs src={img} alt="" />
+                <WhatIsComponent />
 
                 <CardsSection>
                     {cards.map((card, index) => (
@@ -231,26 +371,32 @@ export default function Home() {
                 </CardsSection>
             </WhatIs>
 
-            <TextCarac>Características Styled Component</TextCarac>
-            aaaa
+            <TextCarac id="caracteristicas">Características Styled Component</TextCarac>
+
+            <GridCarac>
+                {caracteristicas.map((carac, index) => (
+                    <CardCaracteristicas key={carac.id} titulo={carac.titulo} descricao={carac.descricao} img={carac.img} />
+                ))}
+            </GridCarac>
+
+            <TextComand id="comandos">Principais Comandos</TextComand>
+
+            <ThemeProvider theme={theme}>
+                <Secao>
+                    {comandosStyled.map((item, index) => (
+                        <Card key={index}>
+                            <CardTitulo>
+                                {item.icone} {item.titulo}
+                            </CardTitulo>
+                            <CardDescricao>{item.descricao}</CardDescricao>
+                            <Codigo>{item.codigo}</Codigo>
+                            {item.exemplo}
+                        </Card>
+                    ))}
+                </Secao>
+            </ThemeProvider>
 
             {/*
-    
-            <Section id="caracteristicas">
-                <Title>Quais as características?</Title>
-                <Text>
-                    Com Styled Components, é possível criar componentes estilizados reutilizáveis, com escopo de estilo local, suporte a temas, aninhamento de estilos e uso de props para estilização condicional.
-                </Text>
-            </Section>
-
-            <Section id="comandos">
-                <Title>Principais comandos</Title>
-                <Text>
-                    - `styled.div`, `styled.button`, `styled.h1`, etc.<br />
-                    - Uso de interpolação com props: `${props => props.active ? 'red' : 'blue'}`<br />
-                    - `ThemeProvider` para definir temas globais
-                </Text>
-            </Section>
 
             <Section id="como-usar">
                 <Title>Como usar</Title>
