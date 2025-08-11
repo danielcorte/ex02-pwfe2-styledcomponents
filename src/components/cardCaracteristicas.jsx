@@ -1,64 +1,61 @@
 import styled from "styled-components";
 
-export function CardCaracteristicas({ titulo, descricao, img }) {
+const CardContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; 
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #B2B0E8;
+    transition: transform 0.3s ease;
+    height: 100%; 
 
-    const CardCarac = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 15px;
-        padding: 20px;
-        width: 90%;
-        height: 550px;
-        background-color: deeppink;
-        transition: all;
-        transition-duration: 0.3s;
-
-        &:hover {
-            transform: scale(1.03);
+    &:hover {
+        transform: scale(1.03);
     }
-    `;
+`;
 
-    const Textos = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 90%;
-    `;
+const Textos = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+`;
 
-    const TituloCard = styled.h1`
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        color: white;
-        margin-top: 50px;
-    `;
+const TituloCard = styled.h3`
+    font-size: 1.25rem; 
+    font-weight: bold;
+    text-align: center;
+    color: white;
+`;
 
-    const DescricaoCard = styled.h1`
-        font-size: 16px;
-        color: white;
-        text-align: center;
-        font-weight: lighter;
-        margin-top: 30px;
-        padding-bottom: 20px;
-    `;
+const DescricaoCard = styled.p`
+    font-size: 1rem; 
+    color: white;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 15px;
+`;
 
-    const ImgCard = styled.img`
-        height: auto;
-        width: 300px;
-        border-radius: 10px;
-    `;
+const ImgCard = styled.img`
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+`;
 
+export function CardCaracteristicas({ titulo, descricao, img }) {
     return (
-        <CardCarac>
-            <ImgCard src={img} alt="" />
-
+        <CardContainer>
+            <ImgCard src={img} alt={titulo} />
             <Textos>
                 <TituloCard>{titulo}</TituloCard>
                 <DescricaoCard>{descricao}</DescricaoCard>
             </Textos>
-        </CardCarac>
+        </CardContainer>
     );
 }
